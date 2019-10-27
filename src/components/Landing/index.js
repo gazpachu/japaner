@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Landing = () => (
   <div>
-    <h1>Landing</h1>
+    <h1>あいうえお</h1>
   </div>
 );
 

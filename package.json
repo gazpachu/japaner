@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.22",
+    "emotion": "^10.0.17",
     "firebase": "^7.2.2",
+    "normalize.css": "^8.0.1",
+    "polished": "^3.4.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^4.3.1",

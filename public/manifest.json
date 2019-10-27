@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "KanaWheel",
+  "name": "Multi-player game to learn Hiragana and Katakana",
   "icons": [
     {
       "src": "favicon.ico",
