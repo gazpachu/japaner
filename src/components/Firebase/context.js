@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+
 const FirebaseContext = React.createContext(null);
 
 export const withFirebase = Component => props => (
