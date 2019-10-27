@@ -4,51 +4,60 @@ import { AuthUserContext } from "../Session";
 import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 import * as ROLES from "../../constants/roles";
-import { AppHeader, AppHeaderLink, Title } from "./styles";
-import { Nav, NavItem } from "../../common/common.styles";
+import {
+  AppHeader,
+  AppHeaderLink,
+  Title,
+  Nav,
+  NavItem,
+  ChatIcon,
+  UserIcon,
+  AdminIcon,
+  LoginIcon
+} from "./styles";
 
-const Navigation = () => (
-  <AppHeader>
-    <AppHeaderLink to={ROUTES.LANDING}>
-      <Title>KanaWheel</Title>
-    </AppHeaderLink>
-    <AuthUserContext.Consumer>
-      {authUser =>
-        authUser ? (
-          <NavigationAuth authUser={authUser} />
-        ) : (
-          <NavigationNonAuth />
-        )
-      }
-    </AuthUserContext.Consumer>
-  </AppHeader>
-);
-
-const NavigationAuth = ({ authUser }) => (
-  <Nav>
-    <NavItem>
-      <Link to={ROUTES.HOME}>Home</Link>
-    </NavItem>
-    <NavItem>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
-    </NavItem>
-    {!!authUser.roles[ROLES.ADMIN] && (
-      <NavItem>
-        <Link to={ROUTES.ADMIN}>Admin</Link>
-      </NavItem>
+const Navigation = ({ authUser }) => (
+  <AuthUserContext.Consumer>
+    {authUser => (
+      <AppHeader>
+        <AppHeaderLink to={ROUTES.LANDING}>
+          <Title>KanaWheel</Title>
+        </AppHeaderLink>
+        <Nav>
+          <NavItem>
+            {authUser && (
+              <Link to={ROUTES.HOME} title="Chat room">
+                <ChatIcon />
+              </Link>
+            )}
+          </NavItem>
+          {authUser && (
+            <NavItem>
+              <Link to={ROUTES.ACCOUNT} title="User account">
+                <UserIcon />
+              </Link>
+            </NavItem>
+          )}
+          {authUser && !!authUser.roles[ROLES.ADMIN] && (
+            <NavItem>
+              <Link to={ROUTES.ADMIN} title="Admin">
+                <AdminIcon />
+              </Link>
+            </NavItem>
+          )}
+          <NavItem>
+            {authUser ? (
+              <SignOutButton />
+            ) : (
+              <Link to={ROUTES.SIGN_IN} title="Sign in">
+                <LoginIcon />
+              </Link>
+            )}
+          </NavItem>
+        </Nav>
+      </AppHeader>
     )}
-    <NavItem>
-      <SignOutButton />
-    </NavItem>
-  </Nav>
-);
-
-const NavigationNonAuth = () => (
-  <Nav>
-    <NavItem>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-    </NavItem>
-  </Nav>
+  </AuthUserContext.Consumer>
 );
 
 export default Navigation;

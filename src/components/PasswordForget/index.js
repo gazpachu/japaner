@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-
-import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { withFirebase } from "../Firebase";
+import * as ROUTES from "../../constants/routes";
+import { Form, FormInput, FormButton } from "../../common/common.styles.js";
 
 const PasswordForgetPage = () => (
   <div>
-    <h1>PasswordForget</h1>
+    <h1>Forgot Password?</h1>
     <PasswordForgetForm />
   </div>
 );
 
 const INITIAL_STATE = {
-  email: '',
-  error: null,
+  email: "",
+  error: null
 };
 
 class PasswordForgetFormBase extends Component {
@@ -45,23 +45,23 @@ class PasswordForgetFormBase extends Component {
   render() {
     const { email, error } = this.state;
 
-    const isInvalid = email === '';
+    const isInvalid = email === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={this.onSubmit}>
+        <FormInput
           name="email"
           value={this.state.email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <button disabled={isInvalid} type="submit">
+        <FormButton disabled={isInvalid} type="submit">
           Reset My Password
-        </button>
+        </FormButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }

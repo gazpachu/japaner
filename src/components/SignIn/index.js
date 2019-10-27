@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
-
-import { SignUpLink } from '../SignUp';
-import { PasswordForgetLink } from '../PasswordForget';
-import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import { SignUpLink } from "../SignUp";
+import { PasswordForgetLink } from "../PasswordForget";
+import { withFirebase } from "../Firebase";
+import * as ROUTES from "../../constants/routes";
+import { EmailIcon, GoogleIcon, FacebookIcon, TwitterIcon } from "./styles";
+import { Form, FormInput, FormButton } from "../../common/common.styles.js";
 
 const SignInPage = () => (
   <div>
-    <h1>SignIn</h1>
+    <h1>Sign In</h1>
     <SignInForm />
     <SignInGoogle />
     <SignInFacebook />
@@ -20,13 +21,13 @@ const SignInPage = () => (
 );
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
-  error: null,
+  email: "",
+  password: "",
+  error: null
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS =
-  'auth/account-exists-with-different-credential';
+  "auth/account-exists-with-different-credential";
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
   An account with an E-Mail address to
@@ -65,30 +66,31 @@ class SignInFormBase extends Component {
   render() {
     const { email, password, error } = this.state;
 
-    const isInvalid = password === '' || email === '';
+    const isInvalid = password === "" || email === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={this.onSubmit}>
+        <FormInput
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <FormInput
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
+        <FormButton disabled={isInvalid} type="submit">
+          <EmailIcon />
+          Sign In with Email
+        </FormButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }
@@ -109,9 +111,9 @@ class SignInGoogleBase extends Component {
           {
             username: socialAuthUser.user.displayName,
             email: socialAuthUser.user.email,
-            roles: {},
+            roles: {}
           },
-          { merge: true },
+          { merge: true }
         );
       })
       .then(() => {
@@ -133,11 +135,14 @@ class SignInGoogleBase extends Component {
     const { error } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
+      <Form onSubmit={this.onSubmit}>
+        <FormButton type="submit">
+          <GoogleIcon />
+          Sign In with Google
+        </FormButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }
@@ -158,9 +163,9 @@ class SignInFacebookBase extends Component {
           {
             username: socialAuthUser.additionalUserInfo.profile.name,
             email: socialAuthUser.additionalUserInfo.profile.email,
-            roles: {},
+            roles: {}
           },
-          { merge: true },
+          { merge: true }
         );
       })
       .then(() => {
@@ -182,11 +187,14 @@ class SignInFacebookBase extends Component {
     const { error } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Facebook</button>
+      <Form onSubmit={this.onSubmit}>
+        <FormButton type="submit">
+          <FacebookIcon />
+          Sign In with Facebook
+        </FormButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }
@@ -207,9 +215,9 @@ class SignInTwitterBase extends Component {
           {
             username: socialAuthUser.additionalUserInfo.profile.name,
             email: socialAuthUser.additionalUserInfo.profile.email,
-            roles: {},
+            roles: {}
           },
-          { merge: true },
+          { merge: true }
         );
       })
       .then(() => {
@@ -231,33 +239,36 @@ class SignInTwitterBase extends Component {
     const { error } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Twitter</button>
+      <Form onSubmit={this.onSubmit}>
+        <FormButton type="submit">
+          <TwitterIcon />
+          Sign In with Twitter
+        </FormButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }
 
 const SignInForm = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(SignInFormBase);
 
 const SignInGoogle = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(SignInGoogleBase);
 
 const SignInFacebook = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(SignInFacebookBase);
 
 const SignInTwitter = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(SignInTwitterBase);
 
 export default SignInPage;

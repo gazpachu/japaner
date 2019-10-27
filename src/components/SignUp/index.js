@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-
-import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { withFirebase } from "../Firebase";
+import * as ROUTES from "../../constants/routes";
+import * as ROLES from "../../constants/roles";
+import { Form, FormInput, FormButton } from "../../common/common.styles.js";
 
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
+    <h1>Sign Up</h1>
     <SignUpForm />
   </div>
 );
 
 const INITIAL_STATE = {
-  username: '',
-  email: '',
-  passwordOne: '',
-  passwordTwo: '',
+  username: "",
+  email: "",
+  passwordOne: "",
+  passwordTwo: "",
   isAdmin: false,
-  error: null,
+  error: null
 };
 
-const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
+const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
   An account with this E-Mail address already exists.
@@ -54,9 +54,9 @@ class SignUpFormBase extends Component {
           {
             username,
             email,
-            roles,
+            roles
           },
-          { merge: true },
+          { merge: true }
         );
       })
       .then(() => {
@@ -86,66 +86,59 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const {
-      username,
-      email,
-      passwordOne,
-      passwordTwo,
-      isAdmin,
-      error,
-    } = this.state;
+    const { username, email, passwordOne, passwordTwo, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
-      passwordOne === '' ||
-      email === '' ||
-      username === '';
+      passwordOne === "" ||
+      email === "" ||
+      username === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={this.onSubmit}>
+        <FormInput
           name="username"
           value={username}
           onChange={this.onChange}
           type="text"
           placeholder="Full Name"
         />
-        <input
+        <FormInput
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <FormInput
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <input
+        <FormInput
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
           placeholder="Confirm Password"
         />
-        <label>
+        {/*<label>
           Admin:
-          <input
+          <FormInput
             name="isAdmin"
             type="checkbox"
             checked={isAdmin}
             onChange={this.onChangeCheckbox}
           />
-        </label>
-        <button disabled={isInvalid} type="submit">
+        </label>*/}
+        <FormButton disabled={isInvalid} type="submit">
           Sign Up
-        </button>
+        </FormButton>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }

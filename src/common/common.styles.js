@@ -1,5 +1,4 @@
-import { css } from "@emotion/core";
-import styled from "@emotion/styled";
+import styled, { css } from "styled-components";
 import { darken } from "polished";
 import { Link } from "react-router-dom";
 
@@ -17,6 +16,13 @@ export const breakpoints = {
   mobile: "768px"
 };
 
+export const spacing = {
+  l1: "4px",
+  l2: "8px",
+  l3: "16px",
+  l4: "32px"
+};
+
 export const PageContainer = styled.section`
   text-align: center;
   padding: 20px;
@@ -29,10 +35,10 @@ export const PageContainer = styled.section`
   min-height: calc(100vh - ${headerHeight});
 `;
 
-const button = props => css`
+export const button = props => css`
   outline: none;
-  background: ${props.color ? colors[props.color] : colors.green};
-  border: 1px solid white;
+  background-color: ${props.color ? colors[props.color] : colors.green};
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   color: white;
   font-size: ${props.size === "small" ? "11px" : "14px"};
@@ -43,8 +49,8 @@ const button = props => css`
 
   &:hover {
     background: ${props.color
-      ? darken(0.2, colors[props.color])
-      : darken(0.2, colors.primary)};
+      ? darken(0.05, colors[props.color])
+      : darken(0.05, colors.green)};
   }
 
   opacity: ${props.disabled && ".5"};
@@ -60,72 +66,37 @@ export const ButtonLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const Nav = styled.ul`
-  list-style-type: none;
+export const ButtonIcon = styled.button`
+  background: none;
+  outline: none;
+  border: none;
   padding: 0;
-  margin: 0;
+  cursor: pointer;
 `;
 
-export const NavItem = styled.li`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
-
-const formElement = css`
-  background: white;
+export const formElement = css`
+  background-color: white;
   border: 1px solid ${colors.secondary};
   color: #333;
   border-radius: 5px;
-  font-size: 14px;
-  padding: 9px 8px;
+  padding: 8px;
+  line-height: 25px;
   outline: none;
   width: 100%;
 `;
 
-export const Input = styled.input`
+export const Form = styled.form`
+  max-width: 300px;
+  margin: 0 auto;
+`;
+
+export const FormInput = styled.input`
   ${formElement};
+  margin-bottom: ${spacing.l3};
 `;
 
-export const InputInline = styled.input`
-  ${formElement};
-  margin-right: 5px;
-`;
-
-export const Label = styled.label`
-  margin-right: 5px;
-  display: block;
-  font-size: 12px;
-  margin-bottom: 3px;
-`;
-
-export const Textarea = styled.textarea`
-  ${formElement};
-  min-height: 100px;
-`;
-
-export const Select = styled.select`
-  ${formElement};
-  height: 36px;
-`;
-
-export const SelectInline = styled.select`
-  ${formElement};
-  height: 36px;
-  margin-right: 5px;
-`;
-
-export const Info = styled.span`
-  display: block;
-  font-size: 12px;
-  margin-top: 3px;
-`;
-
-export const IconLeft = styled.i`
-  margin-right: 5px;
-`;
-
-export const IconRight = styled.i`
-  margin-left: 5px;
+export const FormButton = styled.button`
+  ${button};
+  margin-bottom: ${spacing.l3};
+  width: 100%;
 `;

@@ -1,11 +1,8 @@
 {
-  "name": "kanawheel2",
+  "name": "kanawheel",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/core": "^10.0.22",
-    "@emotion/styled": "^10.0.22",
-    "emotion": "^10.0.17",
     "firebase": "^7.2.2",
     "normalize.css": "^8.0.1",
     "polished": "^3.4.1",
@@ -13,7 +10,8 @@
     "react-dom": "^16.11.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "3.2.0",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
