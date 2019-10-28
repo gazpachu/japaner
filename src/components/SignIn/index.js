@@ -161,8 +161,8 @@ class SignInFacebookBase extends Component {
         // Create a user in your Firebase Realtime Database too
         return this.props.firebase.user(socialAuthUser.user.uid).set(
           {
-            username: socialAuthUser.additionalUserInfo.profile.name,
-            email: socialAuthUser.additionalUserInfo.profile.email,
+            username: socialAuthUser.user.displayName,
+            email: socialAuthUser.user.email,
             roles: {}
           },
           { merge: true }
@@ -213,8 +213,8 @@ class SignInTwitterBase extends Component {
         // Create a user in your Firebase Realtime Database too
         return this.props.firebase.user(socialAuthUser.user.uid).set(
           {
-            username: socialAuthUser.additionalUserInfo.profile.name,
-            email: socialAuthUser.additionalUserInfo.profile.email,
+            username: socialAuthUser.user.displayName,
+            email: socialAuthUser.user.email,
             roles: {}
           },
           { merge: true }
