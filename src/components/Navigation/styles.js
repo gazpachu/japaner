@@ -36,13 +36,6 @@ export const AppHeaderLink = styled(Link)`
 export const Title = styled.h1`
   font-weight: lighter;
   margin: 0;
-
-  &:after {
-    content: "beta";
-    position: absolute;
-    font-size: 11px;
-    top: 12px;
-  }
 `;
 
 export const Nav = styled.ul`

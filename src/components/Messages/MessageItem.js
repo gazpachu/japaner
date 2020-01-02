@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { FormInput, Button } from "../../common/common.styles";
 
 class MessageItem extends Component {
   constructor(props) {
@@ -6,14 +7,14 @@ class MessageItem extends Component {
 
     this.state = {
       editMode: false,
-      editText: this.props.message.text,
+      editText: this.props.message.text
     };
   }
 
   onToggleEditMode = () => {
     this.setState(state => ({
       editMode: !state.editMode,
-      editText: this.props.message.text,
+      editText: this.props.message.text
     }));
   };
 
@@ -34,7 +35,7 @@ class MessageItem extends Component {
     return (
       <li>
         {editMode ? (
-          <input
+          <FormInput
             type="text"
             value={editText}
             onChange={this.onChangeEditText}
@@ -50,20 +51,20 @@ class MessageItem extends Component {
           <span>
             {editMode ? (
               <span>
-                <button onClick={this.onSaveEditText}>Save</button>
-                <button onClick={this.onToggleEditMode}>Reset</button>
+                <Button onClick={this.onSaveEditText}>Save</Button>
+                <Button onClick={this.onToggleEditMode}>Cancel</Button>
               </span>
             ) : (
-              <button onClick={this.onToggleEditMode}>Edit</button>
+              <Button onClick={this.onToggleEditMode}>Edit</Button>
             )}
 
             {!editMode && (
-              <button
+              <Button
                 type="button"
                 onClick={() => onRemoveMessage(message.uid)}
               >
                 Delete
-              </button>
+              </Button>
             )}
           </span>
         )}

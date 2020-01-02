@@ -21,12 +21,12 @@ const Navigation = ({ authUser }) => (
     {authUser => (
       <AppHeader>
         <AppHeaderLink to={ROUTES.LANDING}>
-          <Title>KanaWheel</Title>
+          <Title>Japaner</Title>
         </AppHeaderLink>
         <Nav>
           <NavItem>
             {authUser && (
-              <Link to={ROUTES.HOME} title="Chat room">
+              <Link to={ROUTES.CHAT} title="Chat room">
                 <ChatIcon />
               </Link>
             )}

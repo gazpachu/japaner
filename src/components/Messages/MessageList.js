@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import MessageItem from './MessageItem';
+import MessageItem from "./MessageItem";
 
 const MessageList = ({
   authUser,
   messages,
   onEditMessage,
-  onRemoveMessage,
+  onRemoveMessage
 }) => (
   <ul>
     {messages.map(message => (

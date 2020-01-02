@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-
-import { AuthUserContext } from '../Session';
-import { withFirebase } from '../Firebase';
-import MessageList from './MessageList';
+import React, { Component } from "react";
+import { Form, FormInput, Button } from "../../common/common.styles";
+import { AuthUserContext } from "../Session";
+import { withFirebase } from "../Firebase";
+import MessageList from "./MessageList";
 
 class Messages extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      text: '',
+      text: "",
       loading: false,
       messages: [],
-      limit: 5,
+      limit: 5
     };
   }
 
@@ -25,18 +25,18 @@ class Messages extends Component {
 
     this.unsubscribe = this.props.firebase
       .messages()
-      .orderBy('createdAt', 'desc')
+      .orderBy("createdAt", "desc")
       .limit(this.state.limit)
       .onSnapshot(snapshot => {
         if (snapshot.size) {
           let messages = [];
           snapshot.forEach(doc =>
-            messages.push({ ...doc.data(), uid: doc.id }),
+            messages.push({ ...doc.data(), uid: doc.id })
           );
 
           this.setState({
             messages: messages.reverse(),
-            loading: false,
+            loading: false
           });
         } else {
           this.setState({ messages: null, loading: false });
@@ -56,10 +56,10 @@ class Messages extends Component {
     this.props.firebase.messages().add({
       text: this.state.text,
       userId: authUser.uid,
-      createdAt: this.props.firebase.fieldValue.serverTimestamp(),
+      createdAt: this.props.firebase.fieldValue.serverTimestamp()
     });
 
-    this.setState({ text: '' });
+    this.setState({ text: "" });
 
     event.preventDefault();
   };
@@ -70,7 +70,7 @@ class Messages extends Component {
     this.props.firebase.message(message.uid).update({
       ...messageSnapshot,
       text,
-      editedAt: this.props.firebase.fieldValue.serverTimestamp(),
+      editedAt: this.props.firebase.fieldValue.serverTimestamp()
     });
   };
 
@@ -81,7 +81,7 @@ class Messages extends Component {
   onNextPage = () => {
     this.setState(
       state => ({ limit: state.limit + 5 }),
-      this.onListenForMessages,
+      this.onListenForMessages
     );
   };
 
@@ -93,9 +93,9 @@ class Messages extends Component {
         {authUser => (
           <div>
             {!loading && messages && (
-              <button type="button" onClick={this.onNextPage}>
+              <Button type="button" onClick={this.onNextPage}>
                 More
-              </button>
+              </Button>
             )}
 
             {loading && <div>Loading ...</div>}
@@ -111,18 +111,14 @@ class Messages extends Component {
 
             {!messages && <div>There are no messages ...</div>}
 
-            <form
-              onSubmit={event =>
-                this.onCreateMessage(event, authUser)
-              }
-            >
-              <input
+            <Form onSubmit={event => this.onCreateMessage(event, authUser)}>
+              <FormInput
                 type="text"
                 value={text}
                 onChange={this.onChangeText}
               />
-              <button type="submit">Send</button>
-            </form>
+              <Button type="submit">Send</Button>
+            </Form>
           </div>
         )}
       </AuthUserContext.Consumer>
